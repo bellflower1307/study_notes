@@ -126,6 +126,9 @@
     <pre><code class="java">int num = 100;
 byte b = (byte) num; // キャストを使用した型変換</code></pre>
     <p>キャストを使用する際には、データの損失が発生する可能性があることに注意する必要があります。例えば、int型の値がbyte型の範囲を超える場合、キャストを使用しても正しい値が得られない可能性があります。</p>
+    <p>なお、誤解しやすいですが、暗黙の型変換と同じ方向へキャストすることも可能です。</p>
+    <pre><code class="java">int num = 100;
+long l = (long) num; // 暗黙の型変換と同じ方向へのキャスト</code></pre>
     <p>以下の画像はプリミティブ型の暗黙の型変換を示しています。矢印がある方向へは自動で型変換されますが、それ以外の方向に型変換を行う場合はキャストを使用する必要があります。</p>
     <img src="型変換.png" alt="暗黙の型変換の図">
     <p>特に、byte,short,charの型変換には注意が必要です。</p>
@@ -162,8 +165,41 @@ var age = 25; // int型として推論</code></pre>
       <li>try-with-resources文のリソース宣言</li>
       <li>ラムダ式のパラメータの型が明確な場合</li>
     </ul>
-    <p>数字はデフォルトではint型として扱われ、小数はdouble型として扱われるため、型推論はこれらの型を自動的に推論します。</p>
+    <p>整数はデフォルトではint型として扱われ、小数はdouble型として扱われるため、型推論はこれらの型を自動的に推論します。他の型として推論する場合は末尾にLやFを記述しlong型やfloat型として扱うか、キャストを使用する必要があります。</p>
     <p>また、定数と併用する場合はfinal varの順で宣言する必要があります。</p>
+
+    <h3 id="ラッパークラス">ラッパークラス</h3>
+    <p>ラッパークラスは、基本データ型に対応する参照型です。ラッパークラスを使用することで、基本データ型をオブジェクトとして扱うことができます。</p>
+    <p>Javaには、以下のラッパークラスがあります。</p>
+    <ul>
+      <li>Byte (byte)</li>
+      <li>Short (short)</li>
+      <li>Integer (int)</li>
+      <li>Long (long)</li>
+      <li>Float (float)</li>
+      <li>Double (double)</li>
+      <li>Character (char)</li>
+      <li>Boolean (boolean)</li>
+    </ul>
+    <p>ラッパークラスは、基本データ型の値をオブジェクトとして扱う必要がある場合に使用されます。例えば、コレクションフレームワークなどのクラスは、オブジェクトを扱うため、基本データ型をラッパークラスに変換して使用します。</p>
+    <p>基本データ型からラッパークラスへ変換することをボクシング（Boxing）といい、逆にラッパークラスから基本データ型へ変換することをアンボクシング（Unboxing）といいます。</p>
+    <p>Javaは、必要に応じて自動的にボクシングとアンボクシングを行います。例えば、以下のコードでは、int型の値がInteger型に自動的にボクシングされます。</p>
+    <pre><code class="java">Integer boxedInt = 10; // int型の値がInteger型に自動的にボクシングされる</code></pre>
+    <p>また、以下のコードでは、Integer型の値がint型に自動的にアンボクシングされます。</p>
+    <pre><code class="java">Integer boxedInt = 10;
+int unboxedInt = boxedInt; // Integer型の値がint型に自動的にアンボクシングされる</code></pre>
+    <p>ただし、暗黙の型変換とボクシング/アンボクシングは併用できません。例えば、int型の値をdouble型に変換する場合、ボクシングと暗黙の型変換は同時に使用できません。</p>
+    <pre><code class="java">Integer boxedInt = 10;
+double d = boxedInt; // コンパイルエラー: ボクシングと暗黙の型変換は併用できない</code></pre>
+    <p>このような場合は、アンボクシングか型変換を明示的に行う必要があります。</p>
+    <pre><code class="java">Integer boxedInt = 10;
+double d = boxedInt.doubleValue(); // 明示的にアンボクシングしてから暗黙の型変換を行う
+double e = (double) boxedInt; // または、明示的な型変換を使用する</code></pre>
+    <p>ラッパークラスを使用する際には、null値に注意する必要があります。ラッパークラスの変数はnull値を取ることができるため、null値を扱う際にはNullPointerExceptionが発生する可能性があります。</p>
+    <p>例えば、以下のコードでは、Integer型の変数がnull値を取るため、NullPointerExceptionが発生します。</p>
+    <pre><code class="java">Integer boxedInt = null;
+int unboxedInt = boxedInt; // NullPointerExceptionが発生する</code></pre>
+    <p>これは、アンボクシングをする際に、内部でvalueOf()メソッドが呼び出され、null値を扱おうとするとNullPointerExceptionが発生するためです。</p>
 
     <a href="../index.html">Java Silver用学習ノートへ戻る</a><br>
     <a href="../../index.html">トップへ戻る</a>
