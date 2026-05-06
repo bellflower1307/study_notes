@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>条件分岐</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="../../toc.js" defer></script>
+</head>
+
+<body>
+
+  <h1>条件分岐</h1>
+
+  <div id="toc">
+    <strong>目次</strong>
+    <ul id="toc-list"></ul>
+  </div>
+
+  <a href="../index.html">Java Silver用学習ノートへ戻る</a><br>
+    <a href="../../index.html">トップへ戻る</a>
+
+  <h2 id="ch4_title">条件分岐</h2>
+    <p>この章では、Javaでの条件分岐について学びます。条件分岐とは、条件の真偽に応じて実行される処理を分けることです。今までは記述した順に処理が実行されていましたが、条件分岐を使うことで、条件に応じて異なる処理を実行できます。</p>
+    <p>Javaには、以下のような条件分岐の構文があります。</p>
+    <ul>
+      <li>if文</li>
+      <li>switch文</li>
+    </ul>
+    <p>以下では、各条件分岐の構文と使用方法について詳しく説明します。</p>
+    <h3 id="if文">if文</h3>
+    <p>if文は、条件が真のときだけ処理を実行する構文です。</p>
+    <pre><code>if (条件) {
+    // 条件が真のときの処理
+}</code></pre>
+<p>if文では、条件が真のときだけ中括弧内の処理が実行されます。なお、真の場合の処理が1文の場合は中括弧を省略できます。</p>
+<p>フローチャートで表すと、次のようになります。</p>
+<img src="if文.png" alt="if文のフローチャート" style="max-width: 100%; height: auto;">
+<p>if文は、条件が真のときだけ処理を実行するため、条件が偽のときは何も処理されません。条件が偽のときに別の処理を実行したい場合は、else文を使用します。</p>
+<pre><code>if (条件) {
+    // 条件が真のときの処理
+} else {
+    // 条件が偽のときの処理
+}</code></pre>
+<p>if-else文をフローチャートで表すと、次のようになります。</p>
+<img src="if-else文.png" alt="if-else文のフローチャート" style="max-width: 100%; height: auto;">
+<p>さらに、複数の条件を順番に評価したい場合は、else if文を使用します。</p>
+<pre><code>if (条件1) {
+    // 条件1が真のときの処理
+} else if (条件2) {
+    // 条件2が真のときの処理
+} else {
+    // 条件1も条件2も偽のときの処理
+}</code></pre>
+<p>if-else if-else文をフローチャートで表すと、次のようになります。</p>
+<img src="if-else if-else文.png" alt="if-else if-else文のフローチャート" style="max-width: 100%; height: auto;">
+<p>if文は必ず記載する必要があり、省略できません。else文やelse if文は必要に応じて記載しますが、省略することもできます。elseは1つまで記載できますが、else ifは複数記載することができます。</p>
+    <h3 id="switch文">switch文</h3>
+    <p>switch文は、変数の値に応じて複数の処理を分岐させる構文です。</p>
+<pre><code>switch (変数) {
+    case 値1:
+        // 値1のときの処理
+        break;
+    case 値2:
+        // 値2のときの処理
+        break;
+    default:
+        // どの条件にも該当しないときの処理
+}</code></pre>
+<p>switch文をフローチャートで表すと、次のようになります。</p>
+<img src="switch文.png" alt="switch文のフローチャート" style="max-width: 100%; height: auto;">
+<p>switch文では、変数の値がcaseの値と一致する場合、そのcaseの処理が実行されます。処理が実行された後、break文がある場合はswitch文を抜けます。break文がない場合は、次のcaseの処理も実行されます。どのcaseにも該当しない場合は、defaultの処理が実行されます。</p>
+<p>defaultは必ず末尾に書く必要はありません。</p>
+<p>switch文は、変数の値が特定の値に一致する場合に処理を分岐させるため、複数の条件を評価する場合に便利です。ただし、switch文の変数に使用できる型は、以下に限られます。</p>
+<ul>
+    <li>byte（およびByte）</li>
+    <li>short（およびShort）</li>
+    <li>int（およびInteger）</li>
+    <li>char（およびCharacter）</li>
+    <li>String</li>
+    <li>enum</li>
+</ul>
+<p>また、caseの値は変数ではなく、定数でなければなりません。変数を使用している場合はコンパイルエラーになります。</p>
+
+    <a href="../index.html">Java Silver用学習ノートへ戻る</a><br>
+    <a href="../../index.html">トップへ戻る</a>
+    
+
+  </body>
+</html>
