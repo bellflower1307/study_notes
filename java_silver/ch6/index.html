@@ -95,7 +95,16 @@
 }</code></pre>
     <p>拡張for文は、配列やコレクションの要素を順番に処理する際に便利です。ただし、要素のインデックスが必要な場合は、通常のfor文を使用する必要があります。</p>
     <p>また、拡張for文では処理している配列やコレクションの要素を変更することはできません。</p>
-    
+    <h3 id="可変長引数">可変長引数</h3>
+    <p>可変長引数は、メソッドに渡す引数の数を柔軟に指定できる機能です。可変長引数は、配列として扱われます。</p>
+    <pre><code>public void printValues(String... values) {
+    for (String value : values) {
+        System.out.println(value);
+    }
+}</code></pre>
+    <p>このコードでは、printValuesメソッドは任意の数のString型の引数を受け取ります。呼び出し方は以下のようになります。</p>
+    <pre><code>printValues("Hello", "World");</code></pre>
+    <p>この呼び出しは、printValuesメソッドに2つのString型の引数を渡しています。可変長引数は、引数の数が不定である場合に便利です。</p>
 
     <a href="../index.html">Java Silver用学習ノートへ戻る</a><br>
     <a href="../../index.html">トップへ戻る</a>

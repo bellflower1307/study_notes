@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>クラスとメソッド</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="../../toc.js" defer></script>
+</head>
+
+<body>
+
+  <h1>クラスとメソッド</h1>
+
+  <div id="toc">
+    <strong>目次</strong>
+    <ul id="toc-list"></ul>
+  </div>
+
+  <a href="../index.html">Java Silver用学習ノートへ戻る</a><br>
+    <a href="../../index.html">トップへ戻る</a>
+
+  <h2 id="ch7_title">クラスとメソッド</h2>
+  <p>ここからはオブジェクト指向プログラミングとしてクラスとメソッドについて学びます。</p>
+  <p>Javaではシステムを管理しやすいように役割ごとに分割し、それぞれを組み合わせてアプリケーションを構築します。この分割したものをオブジェクトといいます。</p>
+  <p>Javaでは属性であるフィールドと機能であるメソッドを持つクラスを定義することで、オブジェクトを生成し、管理します。</p>
+  <p>また、フィールドとメソッドを合わせてメンバと呼びます。</p>
+  <p>例えば、以下のようなクラスを定義できます。</p>
+    <pre><code>public class Car {
+    // フィールド（属性）
+    private String color;
+    private int speed;
+    // メソッド（機能）
+    public void accelerate() {
+        speed += 10;
+    }
+    public void brake() {
+        speed -= 10;
+    }
+}</code></pre>
+    <p>このクラスは、車を表すクラスで、色と速度という属性を持ち、加速とブレーキという機能を持っています。</p>
+    <h3 id="フィールド">フィールド</h3>
+    <p>フィールドは、オブジェクトの属性を表す変数です。上記のCarクラスでは、colorとspeedがフィールドとして定義されています。</p>
+    <p>フィールドの構文は以下の通りです。</p>
+    <pre><code>[修飾子] 型名 変数名;</code></pre>
+    <p>修飾子は、フィールドのアクセスレベルやその他の特性を指定するために使用されます。例えば、privateはフィールドがクラス内でのみアクセス可能であることを示します。</p>
+    <h3 id="メソッド">メソッド</h3>
+    <p>メソッドは、オブジェクトの機能を表す関数です。上記のCarクラスでは、accelerateとbrakeがメソッドとして定義されています。</p>
+    <p>メソッドの構文は以下の通りです。</p>
+    <pre><code>[修飾子] 戻り値の型 メソッド名(引数リスト) {
+    // メソッドの本体
+}</code></pre>
+    <p>修飾子は、メソッドのアクセスレベルやその他の特性を指定するために使用されます。例えば、publicはメソッドがどこからでもアクセス可能であることを示します。</p>
+    <p>戻り値の型は、メソッドが返す値の型を指定します。返す値がない場合は、voidを使用します。</p>
+    <p>引数リストは、メソッドが受け取る引数の型と名前を指定します。引数がない場合は、空の括弧を使用します。</p>
+    <p>メソッドの本体は、メソッドが実行するコードを含むブロックです。</p>
+    <p>ブロック内ではローカル変数の宣言や代入、別メソッドの呼び出しを行うことができます。</p>
+    <h3 id="クラスの定義とオブジェクトの生成">クラスの定義とオブジェクトの生成</h3>
+    <p>クラスを定義するには、classキーワードを使用します。クラスの構文は以下の通りです。</p>
+    <pre><code>[修飾子] class クラス名 {
+    // クラスの本体
+}</code></pre>
+    <p>修飾子は、クラスのアクセスレベルやその他の特性を指定するために使用されます。例えば、publicはクラスがどこからでもアクセス可能であることを示します。</p>
+    <p>クラスの本体は、フィールドやメソッドなどのクラスのメンバを含むブロックです。</p>
+    <p>クラスを定義した後、new演算子を使用してオブジェクトを生成できます。オブジェクトの生成の構文は以下の通りです。</p>
+    <pre><code>クラス名 変数名 = new クラス名();</code></pre>
+    <p>この構文では、クラス名は生成するオブジェクトのクラスを指定し、変数名は生成されたオブジェクトを参照する変数を指定します。</p>
+    <p>例えば、Carクラスのオブジェクトを生成するには、以下のようにします。</p>
+    <pre><code>Car myCar = new Car();</code></pre>
+    <p>このコードは、Carクラスの新しいオブジェクトを生成し、そのオブジェクトをmyCarという変数に参照させています。</p>
+    <p>生成されたオブジェクトのフィールドやメソッドにアクセスするには、ドット演算子を使用します。例えば、myCarオブジェクトのcolorフィールドにアクセスするには、以下のようにします。</p>
+    <pre><code>String carColor = myCar.color;</code></pre>
+    <p>また、myCarオブジェクトのaccelerateメソッドを呼び出すには、以下のようにします。</p>
+    <pre><code>myCar.accelerate();</code></pre>
+    <h3>変数のスコープ</h3>
+    <p>変数のスコープは、その変数がアクセスできる範囲を示します。Javaでは、変数は宣言されたブロック内でのみアクセス可能です。</p>
+    <p>クラスのフィールドは、クラス全体でアクセス可能ですが、ローカル変数は、その変数が宣言されたメソッドやブロック内でのみアクセス可能です。</p>
+    <p>例えば、以下のコードでは、フィールドとローカル変数のスコープの違いを示しています。</p>
+    <pre><code>public class Example {
+    private int field; // フィールド
+    public void method() {
+        int localVariable = 10; // ローカル変数
+        field = 5; // フィールドにアクセス
+        System.out.println(localVariable); // ローカル変数にアクセス
+    }
+    public void anotherMethod() {
+        // System.out.println(localVariable); // ローカル変数にはアクセスできない
+    }
+}
+</code></pre>
+    <p>このコードでは、fieldはクラスのフィールドであり、methodメソッド内でアクセスできますが、anotherMethodメソッド内ではアクセスできません。一方、localVariableはmethodメソッド内のローカル変数であり、methodメソッド内でのみアクセスできます。</p>
+    <p>また、変数名にも注意が必要です。同じ名前の変数が異なるスコープで宣言されている場合、内側のスコープの変数が優先して使用されます。</p>
+    <pre><code>public class Example {
+    private int value; // フィールド
+    public void method() {
+        int value = 10; // ローカル変数
+        System.out.println(value); // ローカル変数が優先される
+    }
+}</code></pre>
+    <p>このコードでは、fieldはクラスのフィールドであり、methodメソッド内でローカル変数valueが宣言されています。methodメソッド内でvalueを参照すると、ローカル変数が優先されて使用されます。</p>
+    <p>フィールドの初期値は配列と同様に、フィールドが宣言されたときに自動的に設定されます。</p>
+
+    <h3 id="オーバーロード">オーバーロード</h3>
+    <p>オーバーロードは、同じ名前のメソッドやコンストラクタを複数定義することです。引数の数や型が異なる場合、適切なメソッドやコンストラクタが呼び出されます。</p>
+    <p>例えば、以下のコードでは、同じ名前のメソッドが複数定義されています。</p>
+    <pre><code>public class Example {
+    public void print() {
+        System.out.println("No arguments");
+    }
+    public void print(String message) {
+        System.out.println("Message: " + message);
+    }
+    public void print(int number) {
+        System.out.println("Number: " + number);
+    }
+}</code></pre>
+    <p>このコードでは、printメソッドが3つ定義されています。引数の数や型が異なるため、適切なprintメソッドが呼び出されます。</p>
+    <p>オーバーロードされたメソッドを呼び出すには、引数の数や型に応じて適切な引数を渡します。例えば、以下のようにします。</p>
+    <pre><code>Example example = new Example();
+example.print(); // No arguments
+example.print("Hello"); // Message: Hello
+example.print(42); // Number: 42</code></pre>
+    <p>このコードでは、printメソッドが引数の数や型に応じて適切に呼び出されます。</p>
+    <p>呼び出される優先度は、引数の数と型に依存します。</p>
+    <p>完全一致する者が最も優先され、次に暗黙の型変換が適用されます。その次にBoxing/Unboxingが適用され、最後に可変長引数が適用されます。</p>
+    <p>オーバーロードの優先度</p>
+    <pre><code>完全一致 > 暗黙の型変換 > Boxing/Unboxing > 可変長引数</code></pre>
+
+    <h3 id="コンストラクタ">コンストラクタ</h3>
+    <p>コンストラクタは、クラスのオブジェクトを生成する際に呼び出される特殊なメソッドです。コンストラクタは、クラス名と同じ名前を持ち、戻り値の型を指定しません。</p>
+    <p>例えば、以下のコードでは、Carクラスにコンストラクタを追加しています。</p>
+    <pre><code>public class Car {
+    private String color;
+    private int speed;
+
+    public Car(String color, int speed) {
+        this.color = color;
+        this.speed = speed;
+    }
+
+    public void accelerate() {
+        speed += 10;
+    }
+
+    public void brake() {
+        speed -= 10;
+    }
+}</code></pre>
+    <p>このコードでは、Carクラスにコンストラクタが追加されています。コンストラクタは、オブジェクトを生成する際に呼び出され、フィールドの初期化を行います。</p>
+    <p>コンストラクタを使用してCarクラスのオブジェクトを生成するには、以下のようにします。</p>
+    <pre><code>Car myCar = new Car("Red", 0);</code></pre>
+    <p>このコードは、Carクラスの新しいオブジェクトを生成し、そのオブジェクトをmyCarという変数に参照させています。コンストラクタには、colorとspeedの初期値が引数として渡されます。</p>
+    <p>コンストラクタは、クラスに複数定義することができます。これをコンストラクタのオーバーロードと呼びます。オーバーロードされたコンストラクタは、異なる引数リストを持ち、オブジェクトの生成時に適切なコンストラクタが呼び出されます。</p>
+    <pre><code>public class Car {
+    private String color;
+    private int speed;
+    public Car() {
+        this.color = "Unknown";
+        this.speed = 0;
+    }
+    public Car(String color) {
+        this.color = color;
+        this.speed = 0;
+    }
+    public Car(String color, int speed) {
+        this.color = color;
+        this.speed = speed;
+    }
+    public void accelerate() {
+        speed += 10;
+    }
+    public void brake() {
+        speed -= 10;
+    }
+}</code></pre>
+    <p>このコードでは、Carクラスに3つのコンストラクタが定義されています。引数の数や型が異なるため、オブジェクトの生成時に適切なコンストラクタが呼び出されます。</p>
+    <p>また、コンストラクタを設定しなかった場合、Javaはデフォルトコンストラクタを自動的に生成します。</p>
+
+    <h3 id="staticメンバとインスタンスメンバ">staticメンバとインスタンスメンバ</h3>
+    <p>staticメンバは、クラスのインスタンスを作成せずにアクセスできるメンバーです。一方、インスタンスメンバは、クラスのインスタンスを作成してからアクセスできるメンバーです。</p>
+    <p>staticメンバは、クラス全体で共有されるため、すべてのインスタンスから同じ値を参照します。インスタンスメンバは、各インスタンスごとに異なる値を持つことができます。</p>
+    <p>staticメンバを定義するには、staticキーワードを使用します。例えば、以下のコードでは、Carクラスにstaticフィールドとstaticメソッドが追加されています。</p>
+    <pre><code>public class Car {
+    private String color;
+    private int speed;
+    private static int numberOfCars = 0; // staticフィールド
+    public Car(String color, int speed) {
+        this.color = color;
+        this.speed = speed;
+        numberOfCars++; // コンストラクタでstaticフィールドを更新
+    }
+    public void accelerate() {
+        speed += 10;
+    }
+    public void brake() {
+        speed -= 10;
+    }
+    public static int getNumberOfCars() { // staticメソッド
+        return numberOfCars;
+    }
+}</code></pre>
+    <p>このコードでは、CarクラスにnumberOfCarsというstaticフィールドとgetNumberOfCarsというstaticメソッドが追加されています。numberOfCarsは、Carクラスのインスタンスが生成されるたびに更新されます。getNumberOfCarsメソッドは、Carクラスのインスタンスを作成せずに呼び出すことができます。</p>
+    <p>staticメンバにアクセスするには、クラス名を使用します。例えば、CarクラスのnumberOfCarsフィールドにアクセスするには、以下のようにします。</p>
+    <pre><code>int totalCars = Car.numberOfCars;</code></pre>
+    <p>CarクラスのgetNumberOfCarsメソッドを呼び出すには、以下のようにします。</p>
+    <pre><code>int totalCars = Car.getNumberOfCars();</code></pre>
+    <p>インスタンスメンバにアクセスするには、クラスのインスタンスを使用します。例えば、myCarオブジェクトのcolorフィールドにアクセスするには、以下のようにします。</p>
+    <pre><code>String carColor = myCar.color;</code></pre>
+    <p>myCarオブジェクトのaccelerateメソッドを呼び出すには、以下のようにします。</p>
+    <pre><code>myCar.accelerate();</code></pre>
+    <p>staticメンバはインスタンスからアクセスすることもできますが、通常はクラス名を使ってアクセスします。</p>
+    <p>また、staticメンバとインスタンスメンバの間には、アクセスに関するルールがあります。</p>
+    <p>staticメンバ同士、またはインスタンスメンバ同士では、通常のアクセス規則が適用されます。</p>
+    <p>インスタンスメンバからstaticメンバへアクセスすることはできます。</p>
+    <p>しかし、staticメンバからインスタンスメンバへアクセスすることはできません。</p>
+    <p>staticメンバからインスタンスメンバへアクセスするには、クラスのインスタンスを作成してからアクセスする必要があります。</p>
+    <pre><code>public class Example {
+    private int instanceField; // インスタンスメンバ
+    private static int staticField; // staticメンバ
+    public static void staticMethod() {
+        // instanceField = 10; // エラー: staticメソッドからインスタンスフィールドにアクセスできない
+        Example example = new Example(); // クラスのインスタンスを作成
+        example.instanceField = 10; // インスタンスを通じてアクセス
+    }
+    public void instanceMethod() {
+        instanceField = 10; // インスタンスメンバにアクセス
+        staticField = 20; // staticメンバにアクセス
+
+        }
+    }</code></pre>
+    <p>このコードでは、staticMethodはstaticメソッドであり、instanceFieldはインスタンスメンバです。staticMethod内でinstanceFieldに直接アクセスすることはできませんが、Exampleクラスのインスタンスを作成してからアクセスすることができます。</p>
+    <p>staticメンバはnullを代入した変数に対してもアクセスできます。</p>
+        <pre><code>public class Example {
+    private static int staticField; // staticメンバ
+    public static void staticMethod() {
+        Example example = null; // nullのインスタンス
+        example.staticField = 10; // nullを通じてstaticメンバにアクセス
+        }
+        }</code></pre>
+    <p>このコードでは、exampleという変数はnullを参照していますが、staticFieldにアクセスすることができます。これは、staticメンバがクラス全体で共有されるため、クラスの情報を参照してアクセスできるからです。</p>
+    <h3 id="staticイニシャライザ">staticイニシャライザ</h3>
+    <p>staticイニシャライザは、クラスが初めてロードされたときに実行されるコードブロックです。staticイニシャライザは、staticフィールドの初期化やその他のクラスレベルの初期化を行うために使用されます。</p>
+    <p>staticイニシャライザの構文は以下の通りです。</p>
+    <pre><code>static {
+    // staticイニシャライザのコード
+}</code></pre>
+    <p>このコードブロック内のコードは、クラスが初めてロードされたときに一度だけ実行されます。staticイニシャライザは、クラスのstaticフィールドを初期化するために便利です。</p>
+    <h3 id="アクセス修飾子">アクセス修飾子</h3>
+    <p>アクセス修飾子は、クラスやクラスのメンバのアクセスレベルを指定するために使用されます。Javaには、public、protected、private、およびデフォルト（アクセス修飾子なし）の4つのアクセス修飾子があります。</p>
+    <p>publicは、クラスやメンバがどこからでもアクセス可能であることを示します。protectedは、クラスやメンバが同じパッケージ内のクラスやサブクラスからアクセス可能であることを示します。privateは、クラスやメンバがクラス内でのみアクセス可能であることを示します。デフォルトは、クラスやメンバが同じパッケージ内のクラスからアクセス可能であることを示します。</p>
+        <p>アクセス修飾子は、クラスやメンバの宣言の前に指定します。例えば、以下のコードでは、Carクラスのフィールドとメソッドにアクセス修飾子が指定されています。</p>
+        <pre><code>public class Car {
+    private String color; // privateフィールド
+    private int speed; // privateフィールド
+    public Car(String color, int speed) { // publicコンストラクタ
+        this.color = color;
+        this.speed = speed;
+    }
+    public void accelerate() { // publicメソッド
+        speed += 10;
+    }
+    public void brake() { // publicメソッド
+        speed -= 10;
+    }
+}</code></pre>
+    <p>このコードでは、colorとspeedフィールドはprivateで宣言されており、Carクラスの外部から直接アクセスすることはできません。一方、コンストラクタとメソッドはpublicで宣言されており、Carクラスの外部からアクセスすることができます。</p>
+    <p>アクセス修飾子を適切に使用することで、クラスの設計をより安全で柔軟にすることができます。例えば、フィールドをprivateにすることで、クラスの内部状態を外部から直接変更できないようにし、メソッドをpublicにすることで、クラスの機能を外部から利用できるようにすることができます。これをカプセル化と言います。</p>
+    <p>また、コンストラクタ、フィールド、メソッドにはpublic, protected, private, およびデフォルト（アクセス修飾子なし）の4つのアクセス修飾子が使えますが、クラスに関してはpublicおよびデフォルトのアクセス修飾子のみ使用できる点に注意してください。</p>
+
+    <h3 id="値コピー">値コピーと参照コピー</h3>
+    <p>Javaでは、変数に値を代入するとき、基本データ型の場合は値がコピーされますが、参照データ型の場合は参照がコピーされます。</p>
+    <p>基本データ型の変数に値を代入すると、その値がコピーされます。例えば、以下のコードでは、aとbは独立した変数であり、aの値を変更してもbの値には影響しません。</p>
+    <pre><code>int a = 5;
+int b = a; // aの値がbにコピーされる
+a = 10; // aの値を変更
+System.out.println(b); // bの値は5のまま</code></pre>
+    <p>一方、参照データ型の変数に値を代入すると、その変数はオブジェクトへの参照をコピーします。例えば、以下のコードでは、array1とarray2は同じ配列を参照しており、array1の内容を変更するとarray2の内容も変更されます。</p>
+    <pre><code>int[] array1 = {1, 2, 3};
+int[] array2 = array1; // array1の参照がarray2にコピーされる
+array1[0] = 10; // array1の内容を変更
+System.out.println(array2[0]); // array2の内容も変更される（10と表示される）</code></pre>
+    <p>このように、基本データ型の変数は値がコピーされるため、独立した変数になりますが、参照データ型の変数は参照がコピーされるため、同じオブジェクトを参照することになります。</p>
+    <p>メソッドの引数についても同様です。基本データ型の引数は値が渡され、参照データ型の引数は参照が渡されます。</p>
+    <p>例えば、以下のコードでは、基本データ型の引数を変更しても呼び出し元の変数には影響しませんが、参照データ型の引数を変更すると呼び出し元のオブジェクトも変更されます。</p>
+    <pre><code>public class Example {
+    public void modifyPrimitive(int value) {
+        value = 10; // 基本データ型の引数を変更
+    }
+    public void modifyReference(int[] array) {
+        array[0] = 10; // 参照データ型の引数を変更
+    }
+}
+Example example = new Example();
+int primitiveValue = 5;
+example.modifyPrimitive(primitiveValue);
+System.out.println(primitiveValue); // primitiveValueは5のまま
+int[] referenceValue = {1, 2, 3};
+example.modifyReference(referenceValue);
+System.out.println(referenceValue[0]); // referenceValueの内容が変更される（10と表示される）</code></pre>
+        <p>このコードでは、modifyPrimitiveメソッドは基本データ型の引数valueを変更しますが、呼び出し元のprimitiveValueには影響しません。一方、modifyReferenceメソッドは参照データ型の引数arrayを変更するため、呼び出し元のreferenceValueも変更されます。</p>
+
+        <h3 id="ガベージコレクション">ガベージコレクション</h3>
+        <p>ガベージコレクションは、Javaのメモリ管理機能の一部であり、不要になったオブジェクトを自動的に回収する仕組みです。ガベージコレクションは、プログラムが使用しているメモリを効率的に管理し、メモリリークを防止するために重要な役割を果たします。</p>
+        <p>Javaのガベージコレクションは、オブジェクトが参照されなくなったときに、そのオブジェクトを自動的に回収します。例えば、以下のコードでは、myCarオブジェクトが参照されなくなった後、ガベージコレクションによって回収される可能性があります。</p>
+        <pre><code>Car myCar = new Car("Red", 0);
+myCar = null; // myCarオブジェクトへの参照を解除
+// ガベージコレクションがmyCarオブジェクトを回収する可能性がある</code></pre>
+        <p>ガベージコレクションは、Javaのヒープメモリを管理するために使用されます。ヒープメモリは、オブジェクトが動的に割り当てられる領域であり、ガベージコレクションによって不要なオブジェクトが回収されることで、ヒープメモリの効率的な利用が促進されます。</p>
+        <p>ガベージコレクションの対象になるのはnull代入された変数や別のオブジェクトの参照により到達不可能になったオブジェクトであることを覚えておきましょう。</p>
+        <pre><code>//nullを代入してガベージコレクションの対象にする
+myCar = null;
+//別変数を参照して到達不可能にする
+Car anotherCar = new Car("Blue", 0);
+myCar = anotherCar; // myCarはanotherCarを参照するようになるため、元のmyCarオブジェクトは到達不可能になる</code></pre>
+        <p>ガベージコレクションは、Javaのメモリ管理を自動化するための重要な機能ですが、ガベージコレクションがいつ実行されるかは予測できません。そのため、不要なオブジェクトへの参照を解除することや、適切なデータ構造を使用することなど、メモリ管理に注意を払うことが重要です。</p>
+
+
+
+
+
+    <a href="../index.html">Java Silver用学習ノートへ戻る</a><br>
+    <a href="../../index.html">トップへ戻る</a>
+    
+
+  </body>
+</html>
