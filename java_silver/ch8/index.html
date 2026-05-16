@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>継承</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="../../style.css">
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script src="../../toc.js" defer></script>
+</head>
+
+<body>
+
+  <h1>継承</h1>
+
+  <div id="toc">
+    <strong>目次</strong>
+    <ul id="toc-list"></ul>
+  </div>
+
+  <a href="../index.html">Java Silver用学習ノートへ戻る</a><br>
+    <a href="../../index.html">トップへ戻る</a>
+
+  <h2 id="ch8_title">継承</h2>
+  <p>ここからはオブジェクト指向プログラミングとして継承について学びます。</p>
+  <p>Javaでは、既存のクラスを基に新しいクラスを定義することができ、これによりコードの再利用が可能になります。この仕組みを継承といいます。</p>
+  <p>継承を行うことで、親クラスのフィールドとメソッドを子クラスで使用できるようになります。</p>
+    <p>継承の基本的な構文は以下の通りです。</p>
+    <pre><code class="language-java">[修飾子] class 子クラス名 extends 親クラス名 {
+    // 子クラスのフィールドやメソッド
+}
+</code></pre>
+    <p>ここで、<code>extends</code>キーワードを使用して、子クラスが親クラスを継承することを示しています。</p>
+    <p>継承を行うと、private修飾子がついていない親クラスのフィールドとメソッドは子クラスに引き継がれます。また、子クラスは親クラスの機能を拡張したり、新しい機能を追加したりできます。</p>
+    <p>継承の例を見てみましょう。</p>
+    <pre><code class="language-java">class Animal {
+    void eat() {
+        System.out.println("This animal eats food.");
+    }
+}
+
+class Dog extends Animal {
+    void bark() {
+        System.out.println("The dog barks.");
+    }
+}
+</code></pre>
+    <p>この例では、<code>Animal</code>クラスが親クラスであり、<code>Dog</code>クラスが子クラスです。<code>Dog</code>クラスは<code>Animal</code>クラスを継承しているため、<code>eat()</code>メソッドを使用できます。</p>
+    <p>継承を使用することで、コードの再利用が促進され、プログラムの構造がより明確になります。</p>
+    <p>親クラスのことをスーパークラス、子クラスのことをサブクラスと呼びます。</p>
+    <p>extendsキーワード後に指定する親クラスは、1つしか指定できません。複数指定するとコンパイルエラーになります。</p>
+    <p>また、すべてのクラスはjava.lang.Objectクラスを暗黙的に継承しています。</p>
+
+    <p>以下では、継承の具体的な使い方について説明します。</p>
+    <h3 id="オーバーライド">オーバーライド</h3>
+    <p>子クラスは、親クラスのメソッドをオーバーライドすることができます。オーバーライドとは、親クラスのメソッドを子クラスで再定義することです。</p>
+    <pre><code class="language-java">class Dog extends Animal {
+    @Override
+    void eat() {
+        System.out.println("The dog eats dog food.");
+    }
+}
+</code></pre>
+    <p>この例では、<code>Dog</code>クラスが<code>Animal</code>クラスの<code>eat()</code>メソッドをオーバーライドしています。オーバーライドされたメソッドは、子クラスのインスタンスで呼び出されると、子クラスの実装が実行されます。</p>
+    <p>オーバーライドの条件として、以下があります。</p>
+    <ul>
+        <li>メソッド名が同じであること</li>
+        <li>引数リストの型と数が同じであること</li>
+        <li>戻り値の型が同じかスーパークラスで定義した型のサブクラスであること</li>
+        <li>アクセス修飾子が同じか、より広いアクセスレベルであること</li>
+        <li>例外の宣言が同じか、より少ない例外を宣言していること</li>
+        <li>static修飾子が同じであること</li>
+        <li>final修飾子がついていないこと</li>
+    </ul>
+    <p>例外については、例外処理の章で詳しく説明します。</p>
+    <p>オーバーライドでは、インスタンスメソッドをstaticメソッドとしてオーバーライドすることはできません。</p>
+    <p>スーパークラスで定義されたfinal修飾子がついたメソッドは、オーバーライドできません。</p>
+
+    <h3 id="Overrideアノテーション">Overrideアノテーション</h3>
+    <p>Overrideアノテーションは、メソッドがオーバーライドされることを示すために使用されます。</p>
+    <p>Overrideアノテーションが付与されたメソッドがオーバーライドされていない場合、コンパイラはエラーを報告します。</p>
+    <p>このアノテーションを使用することで、メソッド名の誤りなどによるオーバーライド漏れがあった場合、コンパイラはオーバーライドのエラーとして検出できます。</p>
+
+    <h3 id="superキーワード">superキーワード</h3>
+    <p>superキーワードは、子クラスから親クラスのメンバーにアクセスするために使用されます。</p>
+    <p>superキーワードを使用して、親クラスのメソッドを呼び出すことができます。</p>
+    <pre><code class="language-java">class Dog extends Animal {
+    @Override
+    void eat() {
+        super.eat(); // 親クラスのeat()メソッドを呼び出す
+        System.out.println("The dog eats dog food.");
+    }
+}
+</code></pre>
+    <p>この例では、<code>super.eat()</code>を使用して、親クラスの<code>eat()</code>メソッドを呼び出しています。</p>
+    <p>superキーワードは、親クラスのメソッドだけではなくフィールドにアクセスするためにも使用できます。</p>
+    <p>自分自身のフィールドにアクセスするには、<code>this</code>キーワードを使用します。</p>
+
+    <h3 id="継承とコンストラクタ">継承とコンストラクタ</h3>
+    <p>子クラスのコンストラクタは、親クラスのコンストラクタを呼び出す必要があります。これを行うために、子クラスのコンストラクタの最初の行で<code>super()</code>を使用します。</p>
+    <pre><code class="language-java">class Dog extends Animal {
+    Dog() {
+        super(); // 親クラスのコンストラクタを呼び出す
+    }
+}
+</code></pre>
+    <p>この例では、<code>super()</code>を使用して、親クラスのコンストラクタを呼び出しています。親クラスのコンストラクタが引数を取る場合は、必要な引数を<code>super()</code>に渡す必要があります。</p>
+    <p>コンストラクタにsuper()が指定されていない場合、コンパイラは暗黙的にsuper()を挿入します。ただし、親クラスに引数を取るコンストラクタがある場合は、明示的にsuper()を呼び出す必要があります。</p>
+    <p>また、コンストラクタにthis()やsuper()を記載する場合は、必ず最初の行に記載する必要があります。2行目以降に記載するとコンパイルエラーになります。</p>
+    <pre><code class="language-java">
+class Dog extends Animal {
+    Dog() {
+        this("Default Name"); // this()はコンストラクタの最初の行でなければならない
+    }
+    Dog(String name) {
+        super(); // super()もコンストラクタの最初の行でなければならない
+    }
+    Dog( String name, int age) {
+            super(); // これはコンストラクタの最初の行なのでOK
+            this("Default Name"); // これは2行目以降なのでコンパイルエラー
+    }
+}
+    </code></pre>
+
+    <h3 id="参照型の型変換">参照型の型変換</h3>
+    <p>継承関係にあるクラスのオブジェクトは、親クラスの型で参照することができます。これをアップキャストといいます。</p>
+    <pre><code class="language-java">Animal animal = new Dog(); // アップキャスト
+</code></pre>
+    <p>この例では、<code>Dog</code>クラスのオブジェクトを<code>Animal</code>クラスの型で参照しています。アップキャストは暗黙的に行われるため、明示的なキャストは必要ありません。</p>
+    <p>一方、親クラスの型で参照しているオブジェクトを子クラスの型に変換することもできます。これをダウンキャストといいます。</p>
+    <pre><code class="language-java">Dog dog = (Dog) animal; // ダウンキャスト
+</code></pre>
+    <p>ダウンキャストは明示的に行う必要がありますが、実行時にオブジェクトが実際に子クラスの型であることが保証されていない場合、<code>ClassCastException</code>がスローされる可能性があります。</p>
+    <p>ダウンキャストを安全に行うためには、<code>instanceof</code>演算子を使用して、オブジェクトが特定のクラスのインスタンスであるかどうかを確認することができます。</p>
+    <pre><code class="language-java">if (animal instanceof Dog) {
+    Dog dog = (Dog) animal; // 安全なダウンキャスト
+}
+</code></pre>
+    <p>アップキャストを行った場合、オーバーライドしたメソッドを呼び出す場合は、以下の注意が必要です。</p>
+    <ul>
+        <li>インスタンスメソッドを呼び出す場合、子クラスの実装（キャストされる前の型）が呼び出されます。</li>
+        <li>staticメソッドを呼び出す場合、親クラスの実装（キャストされた型）が呼び出されます。</li>
+        <li>フィールドを参照する場合、親クラスの実装（キャストされた型）が参照されます。</li>
+    </ul>
+    <pre><code class="language-java">
+Animal animal = new Dog(); // アップキャスト
+animal.eat(); // インスタンスメソッドは子クラスの実装が呼び出される
+Animal.staticMethod(); // staticメソッドは親クラスの実装が呼び出される
+System.out.println(animal.field); // フィールドは親クラスの実装が参照される
+</code></pre>
+    <p>複数クラスで継承関係があった場合も同様です。AnimalクラスのサブクラスとしてDogクラスがあり、DogクラスのサブクラスとしてBreedクラスがある場合も同様です。</p>
+    <pre><code class="language-java">
+Dog dog = new Breed(); // アップキャスト
+Animal animal = dog; // アップキャスト
+animal.eat(); // インスタンスメソッドはBreedクラスの実装が呼び出される  
+</code></pre>
+    <p>この例では、<code>Breed</code>クラスが<code>Dog</code>クラスを継承し、<code>Dog</code>クラスが<code>Animal</code>クラスを継承しています。アップキャストを行った場合でも、インスタンスメソッドは実際のオブジェクトのクラスの実装が呼び出されます。</p>
+    <p>参照型で型変換がある場合は、変数宣言時の型と、実際のオブジェクトの型の2つを意識しておきましょう。</p>
+
+    <a href="../index.html">Java Silver用学習ノートへ戻る</a><br>
+    <a href="../../index.html">トップへ戻る</a>
+    
+
+  </body>
+</html>
